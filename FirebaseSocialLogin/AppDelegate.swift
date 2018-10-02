@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FBSDKCoreKit
+import TwitterKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -19,9 +21,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     FirebaseApp.configure()
+    
     // Initialize sign-in
+    // Google
     GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
     GIDSignIn.sharedInstance().delegate = self
+    
+    // Facebook
+    FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
+    
+    // Twitter
+    let key = Bundle.main.object(forInfoDictionaryKey: "consumerKey")
+    let secret = Bundle.main.object(forInfoDictionaryKey: "consumerSecret")
+    
+    if let key = key as? String, let secret = secret as? String {
+      TWTRTwitter.sharedInstance().start(withConsumerKey: key, consumerSecret: secret)
+    }
+    
     return true
   }
   
@@ -34,6 +50,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
       let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
       controller.firebaseLogin(credential)
     }
+  }
+  
+  func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    let returnGoogle = GIDSignIn.sharedInstance()?.handle(url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation])
+    
+    let returnFacebook = FBSDKApplicationDelegate.sharedInstance()?.application(app, open: url, options: options)
+    
+    let returnTwitter = TWTRTwitter.sharedInstance().application(app, open: url, options: options)
+    
+    return returnGoogle! || returnFacebook! || returnTwitter
   }
 
   func applicationWillResignActive(_ application: UIApplication) {

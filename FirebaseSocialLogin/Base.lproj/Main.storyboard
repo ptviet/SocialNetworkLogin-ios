@@ -38,7 +38,7 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vny-A2-KU7" customClass="GIDSignInButton">
                                 <rect key="frame" x="20" y="40" width="335" height="40"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.91764705882352937" green="0.2627450980392157" blue="0.20784313725490194" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="cJg-RR-fX9"/>
                                 </constraints>
@@ -59,25 +59,79 @@
                                     <action selector="onCustomGoogleSigninPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bOg-80-Kdn"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SPe-hk-pXp" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="20" y="160" width="335" height="40"/>
+                                <color key="backgroundColor" red="0.25882352941176467" green="0.40392156862745099" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="pcb-bd-XNz"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Gt-iy-iEY">
+                                <rect key="frame" x="20" y="210" width="335" height="40"/>
+                                <color key="backgroundColor" red="0.25882352941176467" green="0.40392156862745099" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="fHg-Zf-9DZ"/>
+                                </constraints>
+                                <state key="normal" title="Sign in with Facebook">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCustomFBLoginPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vme-vt-kER"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HYL-Rs-fzM">
+                                <rect key="frame" x="20" y="280" width="335" height="40"/>
+                                <color key="backgroundColor" red="0.10196078431372549" green="0.59215686274509804" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="r2q-j3-s0o"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVA-a0-qLO">
+                                <rect key="frame" x="20" y="330" width="335" height="40"/>
+                                <color key="backgroundColor" red="0.10196078431372549" green="0.59215686274509804" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="heW-OV-P6J"/>
+                                </constraints>
+                                <state key="normal" title="Sign in with Twitter">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCustomTwitterBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="E1n-fW-qYr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Yh2-bo-tVg" firstAttribute="top" secondItem="Vny-A2-KU7" secondAttribute="bottom" constant="10" id="6Hh-ns-J8J"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SPe-hk-pXp" secondAttribute="trailing" constant="20" id="Anb-PG-BMH"/>
+                            <constraint firstItem="SPe-hk-pXp" firstAttribute="top" secondItem="Yh2-bo-tVg" secondAttribute="bottom" constant="30" id="CR2-dG-xma"/>
                             <constraint firstItem="5hW-X9-Noc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="EK9-fF-7d0"/>
+                            <constraint firstItem="SPe-hk-pXp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Eeu-Sh-g1b"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aVA-a0-qLO" secondAttribute="trailing" constant="20" id="Fzw-WT-gUz"/>
                             <constraint firstItem="Vny-A2-KU7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="H3O-Ig-S6I"/>
+                            <constraint firstItem="aVA-a0-qLO" firstAttribute="top" secondItem="HYL-Rs-fzM" secondAttribute="bottom" constant="10" id="HSJ-fg-3DE"/>
+                            <constraint firstItem="0Gt-iy-iEY" firstAttribute="top" secondItem="SPe-hk-pXp" secondAttribute="bottom" constant="10" id="Ida-XW-fCk"/>
+                            <constraint firstItem="HYL-Rs-fzM" firstAttribute="top" secondItem="0Gt-iy-iEY" secondAttribute="bottom" constant="30" id="Mci-rp-nXv"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="X7R-t5-VOU" secondAttribute="trailing" constant="20" id="TW6-kM-oyW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Yh2-bo-tVg" secondAttribute="trailing" constant="20" id="The-DH-Men"/>
+                            <constraint firstItem="aVA-a0-qLO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="bOc-AM-hQL"/>
                             <constraint firstItem="5hW-X9-Noc" firstAttribute="top" secondItem="X7R-t5-VOU" secondAttribute="bottom" constant="10" id="dNR-Br-4SL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Vny-A2-KU7" secondAttribute="trailing" constant="20" id="fy9-P8-pel"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="5hW-X9-Noc" secondAttribute="bottom" constant="20" id="m1v-gI-QZp"/>
                             <constraint firstItem="Yh2-bo-tVg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="qRa-ui-0mn"/>
                             <constraint firstItem="X7R-t5-VOU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="qi3-mm-RhD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0Gt-iy-iEY" secondAttribute="trailing" constant="20" id="sno-MP-09g"/>
                             <constraint firstItem="Vny-A2-KU7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="tdV-9M-UT5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HYL-Rs-fzM" secondAttribute="trailing" constant="20" id="uUo-zP-XJV"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5hW-X9-Noc" secondAttribute="trailing" constant="20" id="wBA-kx-5yN"/>
+                            <constraint firstItem="HYL-Rs-fzM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="wxg-JF-zyT"/>
+                            <constraint firstItem="0Gt-iy-iEY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="yeu-Ed-fPi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="facebookLoginBtn" destination="SPe-hk-pXp" id="7oG-Ym-QJp"/>
+                        <outlet property="twitterLoginView" destination="HYL-Rs-fzM" id="hfL-Tv-PwJ"/>
                         <outlet property="userInfoLbl" destination="X7R-t5-VOU" id="C8g-EI-MNA"/>
                     </connections>
                 </viewController>

@@ -2,15 +2,36 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FBSDKLoginKit
+import TwitterKit
 
-class ViewController: UIViewController, GIDSignInUIDelegate {
-  
+class ViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButtonDelegate {
+
   // Outlets
   @IBOutlet weak var userInfoLbl: UILabel!
+  @IBOutlet weak var facebookLoginBtn: FBSDKLoginButton!
+  @IBOutlet weak var twitterLoginView: UIView!
+  
+  // Variables
+  let fbLoginManager = FBSDKLoginManager()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     GIDSignIn.sharedInstance()?.uiDelegate = self
+    facebookLoginBtn.delegate = self
+    
+    
+    let twitterButton = TWTRLogInButton { (session, error) in
+      if let error = error {
+        debugPrint("Error logging in with Twitter: \(error)")
+      }
+      if let session = session {
+        let credential = TwitterAuthProvider.credential(withToken: session.authToken, secret: session.authTokenSecret)
+        self.firebaseLogin(credential)
+      }
+    }
+    twitterButton.center.x = twitterLoginView.center.x
+    twitterLoginView.addSubview(twitterButton)
     
   }
   
@@ -35,6 +56,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
     }
   }
   
+  // Google Login
   @IBAction func onGoogleSigninPressed(_ sender: Any) {
     GIDSignIn.sharedInstance()?.signIn()
   }
@@ -43,13 +65,56 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
     GIDSignIn.sharedInstance()?.signIn()
   }
   
+  // Facebook Login
+  @IBAction func onCustomFBLoginPressed(_ sender: Any) {
+    fbLoginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
+      if let error = error {
+        debugPrint("Error logging in with FB: \(error)")
+      } else if (result?.isCancelled)! {
+        debugPrint("FB Login cancelled")
+      } else {
+        let credential = FacebookAuthProvider.credential(withAccessToken: (FBSDKAccessToken.current()?.tokenString)!)
+        self.firebaseLogin(credential)
+      }
+    }
+  }
+  
+  func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+    if let error = error {
+      debugPrint("Error logging in with FB: \(error)")
+      return
+    } else {
+      let credential = FacebookAuthProvider.credential(withAccessToken: result.token.tokenString)
+      firebaseLogin(credential)
+    }
+  }
+  
+  func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+    // Handle logout
+  }
+  
+  // Twitter
+  @IBAction func onCustomTwitterBtnPressed(_ sender: Any) {
+    TWTRTwitter.sharedInstance().logIn { (session, error) in
+      if let error = error {
+        debugPrint("Error logging in with Twitter: \(error)")
+      }
+      if let session = session {
+        let credential = TwitterAuthProvider.credential(withToken: session.authToken, secret: session.authTokenSecret)
+        self.firebaseLogin(credential)
+      }
+    }
+  }
+  
+  // Firebase
+  
   func firebaseLogin(_ credential: AuthCredential) {
     Auth.auth().signInAndRetrieveData(with: credential) { (user, error) in
       if let error = error {
         debugPrint(error.localizedDescription)
         return
       } else {
-        self.userInfoLbl.text = user?.user.email
+        self.userInfoLbl.text = user?.user.uid
       }
       
     }
@@ -62,9 +127,12 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
       case GoogleAuthProviderID:
         GIDSignIn.sharedInstance()?.signOut()
       case TwitterAuthProviderID:
-        print("twitter")
+        let store = TWTRTwitter.sharedInstance().sessionStore
+        if let userID = store.session()?.userID {
+          store.logOutUserID(userID)
+        }
       case FacebookAuthProviderID:
-        print("facebook")
+        fbLoginManager.logOut()
       default:
         break
       }

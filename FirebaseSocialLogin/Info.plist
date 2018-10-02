@@ -19,6 +19,12 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb431967757209541</string>
+			</array>
+		</dict>
+		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
@@ -26,9 +32,30 @@
 				<string>com.googleusercontent.apps.218962567368-mieqc2lq4nciurd533o6hjh8o9jare33</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>twitterkit-klcHFeJssgXL9QSejz3SI4mXQ</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>431967757209541</string>
+	<key>FacebookDisplayName</key>
+	<string>FirebaseSocialLogin</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+		<string>twitter</string>
+		<string>twitterauth</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -52,5 +79,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>consumerKey</key>
+	<string>klcHFeJssgXL9QSejz3SI4mXQ</string>
+	<key>consumerSecret</key>
+	<string>OEWsqqOKDIpBSBEchx4CKLXjL8gqMV5zLqsc1C4i59eA016RAC</string>
 </dict>
 </plist>
